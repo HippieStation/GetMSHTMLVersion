@@ -9,12 +9,13 @@ namespace GetMSHTMLVersion
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             var byondProcesses = Process.GetProcessesByName("dreamseeker");
             if (byondProcesses.Length <= 0)
             {
-                Console.WriteLine("BYOND must be opened and you must be connected to a server to run this tool.");
+                User32.MessageBox((IntPtr)0, "BYOND must be opened and you must be connected to a server to run this tool.", "GetMSHTMLVersion", 0);
                 return;
             }
 
@@ -24,12 +25,13 @@ namespace GetMSHTMLVersion
             var tridentModule = byondProcess.Modules.OfType<ProcessModule>().First(pm => pm.ModuleName.Contains("mshtml.dll"));
             if (tridentModule == null)
             {
-                Console.WriteLine("Unable to find MSHTML in dreamseeker?");
+                User32.MessageBox((IntPtr)0, "Unable to find MSHTML in dreamseeker?", "GetMSHTMLVersion", 0);
                 return;
             }
 
             var tridentModuleVersion = tridentModule.FileVersionInfo;
-            Console.WriteLine(tridentModuleVersion);
+            System.Windows.Forms.Clipboard.SetText(tridentModuleVersion.ToString());
+            User32.MessageBox((IntPtr)0, "Version details copied to clipboard", "GetMSHTMLVersion", 0);
         }
     }
 }
