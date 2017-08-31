@@ -31,7 +31,7 @@ namespace GetMSHTMLVersion
 
             var tridentModuleVersion = tridentModule.FileVersionInfo;
             System.Windows.Forms.Clipboard.SetText(tridentModuleVersion.ToString());
-            User32.MessageBox((IntPtr)0, "Version details copied to clipboard", "GetMSHTMLVersion", 0);
+            User32.MessageBox((IntPtr)0, "Version details copied to clipboard\n\n" + tridentModuleVersion.ToString(), "GetMSHTMLVersion", 0);
         }
     }
 }
