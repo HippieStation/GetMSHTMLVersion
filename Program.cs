@@ -22,7 +22,7 @@ namespace GetMSHTMLVersion
             var byondProcess = byondProcesses[0]; // Use the first process, fuck the others.
             var byondProcessModules = byondProcess.Modules;
 
-            var tridentModule = byondProcess.Modules.OfType<ProcessModule>().First(pm => pm.ModuleName.Contains("mshtml.dll"));
+            var tridentModule = byondProcessModules.OfType<ProcessModule>().First(pm => pm.ModuleName.Contains("mshtml.dll"));
             if (tridentModule == null)
             {
                 User32.MessageBox((IntPtr)0, "Unable to find MSHTML in dreamseeker?", "GetMSHTMLVersion", 0);
